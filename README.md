@@ -1,5 +1,10 @@
 # devc-maps
 
+## Project required
+
+Para esse software ser utilizado é nescessario alguma extensão para browser que permita comunicação sem bloqueio de CORS, recomenda-se o CORS "Unblock" para Google Chrome
+
+
 ## Project setup
 ```
 yarn install
