@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Dados saúde Recife</h1>
+    <h1 class="title">Dados saúde Recife</h1>
     <SelectLocation @changeLocation="changeLocation"/>
     <Map :markers="locations"/>
   </div>
@@ -25,7 +25,7 @@ export default {
 
   methods:{
     async changeLocation(ev){
-      const response = await apiGov.get(`datastore_search_sql?sql=SELECT * from "d05f6ffa-304b-4a28-bd03-1ffb26cbf866" where tipo_unidade  like '${ev}'`)
+      const response = await apiGov.get(`local/${ev}`, {'Content-type': 'application/json'})
       this.locations = response.data.result.records
     }
   }
@@ -41,6 +41,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
+  padding: 40px;
+  background-color: rgb(72, 160, 155);
+  
+}
+
+.title{
+  color: #f1efeffc;
 }
 </style>

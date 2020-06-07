@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiGov = axios.create({
-    baseURL: 'http://dados.recife.pe.gov.br/api/3/action/'
+    baseURL: 'https://back-maps-saude-triis1.netlify.app/.netlify/functions/app'
 })
 
 export default apiGov;

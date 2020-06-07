@@ -1,6 +1,6 @@
 <template>
   <select v-model="locationSelected">
-      <option v-for="location in locations" :key=location :value="location">{{location}}</option>
+        <option v-for="location in locations" :key=location.value :value="location.value">{{location.name}}</option>
   </select>
 </template>
 
@@ -22,9 +22,26 @@ export default {
         }
     },
 
+    methods:{
+        order(a, b) {
+            if (a.name > b.name) {
+                return 1;
+            }
+            if (a.name < b.name) {
+                return -1;
+            }
+            // a must be equal to b
+            return 0;
+        }
+    },
+
     async mounted(){
-        const response = await apiGov.get('datastore_search_sql?sql=SELECT distinct tipo_unidade from "d05f6ffa-304b-4a28-bd03-1ffb26cbf866"')
-        this.locations = response.data.result.records.map(location => location.tipo_unidade)
+        const response = await apiGov.get('locals')
+        this.locations = response.data.result.records.map(location => {
+            return {
+                name: location.tipo_unidade.split('|')[1],
+                value: location.tipo_unidade
+            }}).sort(this.order);
     
     }
 
